@@ -16,3 +16,15 @@ def burger_list(request):
         "burgers": burgers,  # burgers키에 burgers변수(QuerySet객체)를 전달한다
     }
     return render(request, "burger_list.html", context)
+
+
+def burger_search(request):
+    keyword = request.GET.get("keyword")
+    print(keyword)
+
+    burgers = Burger.objects.filter(name__icontains=keyword)
+    print(burgers)
+    context = {
+        "burgers": burgers,
+    }
+    return render(request, "burger_search.html", context)
