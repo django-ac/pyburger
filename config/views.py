@@ -21,9 +21,12 @@ def burger_list(request):
 def burger_search(request):
     keyword = request.GET.get("keyword")
     print(keyword)
-
-    burgers = Burger.objects.filter(name__icontains=keyword)
+    if keyword is not None:
+        burgers = Burger.objects.filter(name__contains=keyword)
+    else:
+        burgers = Burger.objects.none()
     print(burgers)
+
     context = {
         "burgers": burgers,
     }
